@@ -8,16 +8,16 @@ import { TypeOrmConfigService } from './typeorm-config.service';
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
-      imports:[ConfigModule],
+      imports: [ConfigModule],
       inject: [ConfigService],
       useClass: TypeOrmConfigService,
       dataSourceFactory: async (options) => {
         const dataSource = new DataSource(options).initialize();
         return dataSource;
-      }
-    })
+      },
+    }),
   ],
   providers: [DatabaseService],
-  exports: [DatabaseService]
+  exports: [DatabaseService],
 })
 export class DatabaseModule {}

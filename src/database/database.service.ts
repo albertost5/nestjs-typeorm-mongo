@@ -4,11 +4,7 @@ import { DataSource } from 'typeorm';
 
 @Injectable()
 export class DatabaseService {
+  constructor(@InjectDataSource() private readonly dataSource: DataSource) {}
 
-    constructor(
-        @InjectDataSource() private readonly dataSource: DataSource
-    ) {}
-    
-
-    // GET Repository<T> to make it accesible
+  // GET Repository<T> to make it accesible
 }

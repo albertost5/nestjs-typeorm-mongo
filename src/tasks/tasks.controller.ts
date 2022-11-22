@@ -4,8 +4,10 @@ import {
   Delete,
   Get,
   Param,
+  ParseBoolPipe,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { CreateTaskDto } from 'src/dto/create-task.dto';
 import { UpdateTaskStatusDto } from 'src/dto/update-task-status.dto';
@@ -17,7 +19,11 @@ export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
   @Post()
-  create(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
+  create(
+    @Body() createTaskDto: CreateTaskDto,
+    @Query('default', ParseBoolPipe) type: boolean,
+  ): Promise<Task> {
+    if (type) return this.tasksService.createDefaultTask();
     return this.tasksService.create(createTaskDto);
   }
 
